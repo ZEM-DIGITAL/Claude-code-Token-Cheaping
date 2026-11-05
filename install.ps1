@@ -85,6 +85,21 @@ if ($NoGraphify) {
             elseif (Get-Command python -ErrorAction SilentlyContinue){ python -m pip install --user graphifyy }
             else { throw "Python 3.10+ not found" }
             $HasGraphify = [bool](Get-Command graphify -ErrorAction SilentlyContinue)
+            if (-not $HasGraphify) {
+                # pip --user puts graphify.exe in a Scripts folder that is often not on PATH
+                $PyCmd = if (Get-Command py -ErrorAction SilentlyContinue) { "py" } else { "python" }
+                $ScriptsDir = (& $PyCmd -c "import sysconfig; print(sysconfig.get_path('scripts', 'nt_user'))").Trim()
+                if ($ScriptsDir -and (Test-Path (Join-Path $ScriptsDir "graphify.exe"))) {
+                    $UserPath = [Environment]::GetEnvironmentVariable("Path", "User")
+                    if (-not $UserPath) { $UserPath = "" }
+                    if (($UserPath -split ";") -notcontains $ScriptsDir) {
+                        [Environment]::SetEnvironmentVariable("Path", ($UserPath.TrimEnd(";") + ";" + $ScriptsDir).TrimStart(";"), "User")
+                        Ok "added $ScriptsDir to your PATH"
+                    }
+                    $env:Path += ";" + $ScriptsDir
+                    $HasGraphify = [bool](Get-Command graphify -ErrorAction SilentlyContinue)
+                }
+            }
         } catch { Warn "graphify install failed: $_" }
     }
     if ($HasGraphify) {
@@ -102,5 +117,5 @@ Write-Host "Done. Next, in each project:" -ForegroundColor Cyan
 Say "1. graphify claude install     (adds graphify rules to the project's CLAUDE.md)"
 Say "2. In Claude Code: /graphify . (builds the graph once)"
 Say "3. In Claude Code: /mcp        (turn off connectors the project does not use)"
-Say "4. Start a new Claude Code conversation so the changes load."
+Say "4. Restart VS Code / Claude Code completely so it picks up the new PATH and rules."
 Write-Host ""
