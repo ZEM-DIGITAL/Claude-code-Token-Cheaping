@@ -77,7 +77,20 @@ Delete the agent files listed in `global/agents/` from `~/.claude/agents/`, remo
 
 ### How much does it save?
 
-It depends on how you work today. Measure it: note your plan usage for a week before and a week after. Pull requests with real numbers are welcome.
+**Estimated: around 50% less usage (range 40-60%)** if you currently use Opus for everything, and **20-35% less** if you already use Sonnet as your default.
+
+These are estimates, not measurements. How we got them, using relative model prices (Haiku 1, Sonnet 3, Opus 5):
+
+| Part of the work | Model | Share | Cost vs all-Opus |
+|---|---|---|---|
+| Architecture and hard bugs | Opus | ~10% | 0.10 |
+| Code, design, writing, scraping, automations | Sonnet | ~65% | 0.39 |
+| Git, tests, builds, small edits, research | Haiku | ~25% | 0.05 |
+| **Total from model routing** | | | **~0.54 (46% less)** |
+
+On top of that, clarify-first, deny rules and context hygiene (`/clear`, `/compact`) usually cut another 10-25% of what is left, and graphify reduces code reading further. That is where the ~50% comes from.
+
+Your result depends on how much Claude actually delegates, how disciplined you are with `/clear`, and your plan's usage rules, which do not have to match API prices exactly. Measure it yourself: compare a normal week before and after (for example with `ccusage`). Pull requests with real numbers are welcome.
 
 ---
 
@@ -122,6 +135,10 @@ Añade `-NoGraphify` (Windows) o `--no-graphify` (macOS/Linux) para no instalar 
 3. Escribe `/mcp` y desactiva los conectores que el proyecto no use.
 4. Opcional: copia `templates/CLAUDE.project.md` como `CLAUDE.md` del proyecto y describe el proyecto en dos líneas.
 5. Abre una conversación nueva y compruébalo con `/context`.
+
+### ¿Cuánto ahorra?
+
+**Estimación: en torno a un 50% menos de consumo (entre 40% y 60%)** si ahora usas Opus para todo, y **un 20-35% menos** si ya usas Sonnet por defecto. Es una estimación, no una medición: el cálculo está en la sección en inglés. Depende de cuánto delegue Claude y de lo constante que seas con `/clear`. Mídelo tú comparando una semana normal antes y después.
 
 ### Hábitos
 
