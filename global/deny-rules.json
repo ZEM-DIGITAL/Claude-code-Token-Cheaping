@@ -1,0 +1,18 @@
+[
+  "Read(./**/node_modules/**)",
+  "Read(./**/.venv/**)",
+  "Read(./**/venv/**)",
+  "Read(./**/__pycache__/**)",
+  "Read(./**/dist/**)",
+  "Read(./**/build/**)",
+  "Read(./**/.next/**)",
+  "Read(./**/*.db)",
+  "Read(./**/*.sqlite3)",
+  "Read(./**/*.p12)",
+  "Read(./**/*.pfx)",
+  "Read(./**/*.pem)",
+  "Read(./**/*.key)",
+  "Read(./**/.env)",
+  "Read(./**/.env.*)",
+  "Read(./graphify-out/graph.json)"
+]

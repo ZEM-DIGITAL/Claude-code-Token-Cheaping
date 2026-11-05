@@ -1,0 +1,29 @@
+# Never commit Claude credentials or personal data
+.credentials.json
+*.credentials*
+.env
+.env.*
+!.env.example
+settings.local.json
+CLAUDE.local.md
+projects/
+todos/
+shell-snapshots/
+statsig/
+*.jsonl
+
+# Certificates and keys
+*.p12
+*.pfx
+*.pem
+*.key
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Generated per project, never here
+graphify-out/
