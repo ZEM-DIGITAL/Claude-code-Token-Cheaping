@@ -12,7 +12,7 @@
 
 | Technique | What it saves |
 |---|---|
-| **Model routing** | Two global subagents: `quick` (Haiku) for mechanical work and web research, `implementer` (Sonnet) for routine code. Opus only decides and handles the hard parts. |
+| **Model routing** | Nine global subagents with a routing table: Haiku for mechanical work, git and running tests (`quick`, `git-ops`, `runner`); Sonnet for code, web design, writing/SEO, scraping and automations (`implementer`, `web-designer`, `writer`, `scraper`, `automation`); Opus only for architecture (`architect`). |
 | **Clarify first** | On vague bug reports, Claude asks *where* and *what you see* before reading any file, instead of exploring blindly. |
 | **Context hygiene** | Claude tells you when to run `/clear` (new task) or `/compact` (long task), because every message re-sends the whole conversation. |
 | **Deny rules** | Claude never reads `node_modules`, `dist`, virtualenvs, databases, `.env` files, certificates or the raw graphify graph. Saves tokens *and* protects secrets. |
@@ -38,7 +38,7 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 **macOS / Linux**
 
 ```bash
-git clone https://github.com/ZEM-DIGITAL//claude-code-token-cheaping
+git clone https://github.com/YOUR_USER/claude-code-token-cheaping
 cd claude-code-token-cheaping
 chmod +x install.sh && ./install.sh
 ```
@@ -52,6 +52,10 @@ Add `-NoGraphify` (Windows) or `--no-graphify` (macOS/Linux) to skip graphify.
 3. Type `/mcp` and turn off connectors the project does not use.
 4. Optional: copy `templates/CLAUDE.project.md` as the project's `CLAUDE.md` and fill in two lines about it.
 5. Start a new conversation and check with `/context`.
+
+### Recommended base model
+
+Set `"model": "sonnet"` in `~/.claude/settings.json`. Opus is then used only through `architect`, or with `/model opus` for a hard task.
 
 ### Daily habits
 
@@ -69,7 +73,7 @@ git pull
 
 ### Uninstall
 
-Delete `~/.claude/agents/quick.md` and `implementer.md`, remove the block between `<!-- token-cheaping:start -->` and `<!-- token-cheaping:end -->` in `~/.claude/CLAUDE.md`, and restore `~/.claude/settings.json.bak` if you want your previous settings back.
+Delete the agent files listed in `global/agents/` from `~/.claude/agents/`, remove the block between `<!-- token-cheaping:start -->` and `<!-- token-cheaping:end -->` in `~/.claude/CLAUDE.md`, and restore `~/.claude/settings.json.bak` if you want your previous settings back.
 
 ### How much does it save?
 
@@ -83,7 +87,7 @@ It depends on how you work today. Measure it: note your plan usage for a week be
 
 | Técnica | Qué ahorra |
 |---|---|
-| **Enrutado de modelos** | Dos subagentes globales: `quick` (Haiku) para tareas mecánicas e investigación web, `implementer` (Sonnet) para código rutinario. Opus solo decide y hace lo difícil. |
+| **Enrutado de modelos** | Nueve subagentes globales con una tabla de reparto: Haiku para tareas mecánicas, git y tests (`quick`, `git-ops`, `runner`); Sonnet para código, diseño web, artículos/SEO, scraping y automatizaciones (`implementer`, `web-designer`, `writer`, `scraper`, `automation`); Opus solo para arquitectura (`architect`). |
 | **Preguntar primero** | Ante un bug vago, Claude pregunta *dónde* y *qué ves* antes de leer archivos, en vez de explorar a ciegas. |
 | **Higiene de contexto** | Claude te avisa de cuándo hacer `/clear` (tarea nueva) o `/compact` (tarea larga), porque cada mensaje reenvía toda la conversación. |
 | **Reglas de bloqueo** | Claude no lee `node_modules`, `dist`, entornos virtuales, bases de datos, `.env`, certificados ni el grafo en bruto de graphify. Ahorra tokens *y* protege secretos. |
@@ -104,7 +108,7 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 **macOS / Linux**
 
 ```bash
-git clone https://github.com/ZEM-DIGITAL//claude-code-token-cheaping
+git clone https://github.com/TU_USUARIO/claude-code-token-cheaping
 cd claude-code-token-cheaping
 chmod +x install.sh && ./install.sh
 ```
