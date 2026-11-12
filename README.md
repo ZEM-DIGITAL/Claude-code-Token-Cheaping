@@ -4,6 +4,35 @@
 
 [English](#english) · [Español](#español)
 
+## Resultados medidos (2 nov vs 9 nov 2026)
+
+Comparación de dos semanas de uso real de Claude Code con `ccusage`, en 2 repos
+(Music-saas y ZEM-TPV) y un solo equipo. La semana del 9 nov es parcial (~4 días).
+El coste es el equivalente a precio de API: el uso real es por suscripción, así que
+el ahorro se traduce en margen bajo los límites diarios y semanales, no en dinero.
+
+| Métrica | Sem. 2 nov | Sem. 9 nov | Cambio |
+|---|---|---|---|
+| Coste equivalente total | $138,75 | $41,48 | -70% |
+| Tokens totales | 329,4 M | 166,9 M | -49% |
+| Cache read | 320,5 M | 159,6 M | -50% |
+| Tokens de salida | 1,49 M | 1,00 M | -33% |
+| Coste por millón de tokens de salida | ~$93 | ~$41 | **-55%** |
+| Coste por commit | $5,34 | $2,18 | **-59%** |
+| Coste por 1.000 líneas añadidas | $6,37 | $4,80 | **-25%** |
+| Commits por día | ~3,7 | ~4,75 | +28% |
+| Líneas añadidas por día | ~3.100 | ~2.160–2.470 | -20% a -30% |
+
+**Estimación final:** para el mismo output, el consumo baja entre un 25% y un 59%
+según la métrica. La cifra central es ~55%.
+
+**Limitaciones:**
+- El ahorro coincide con el paso de Opus a haiku y sonnet. Con estos datos no se
+  puede separar cuánto se debe a esa configuración y cuánto al cambio de modelo.
+- Solo hay datos de un equipo. Faltan otros dispositivos y proyectos.
+- Líneas y commits son indicadores aproximados de producción, no de valor.
+- La semana del 9 nov es parcial; se actualizará con la semana completa.
+
 ---
 
 ## English
